@@ -112,7 +112,7 @@ class Game:
         return nb_missing_target == 0
 
     def auto_move(self):
-        name_strategy = 'ucs' # ucs, bfs, dfs
+        name_strategy = 'bfs' # ucs, bfs, dfs
         strategy, runtime = get_move(self.level.structure[:-1], self.level.position_player, name_strategy)
         # with open("assets/sokobanSolver/Solverlevel_" + str(self.index_level) + ".txt", 'w+') as solver_file:
         #     for listitem in strategy:
