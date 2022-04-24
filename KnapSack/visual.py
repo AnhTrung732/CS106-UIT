@@ -5,7 +5,7 @@ import seaborn as sns
 import random
 import numpy as np
 
-def visual(name) :
+def process_visual(name) :
     name_file = Test(name).load()
     value = []
     weight = []
@@ -20,24 +20,26 @@ def visual(name) :
             weight.append(int(row_2))
         except Exception:
             pass
-    Value_Weight = pd.DataFrame({
-        'Weight': weight,
-        'Value': value})
-    Value_Weight.index += 1
-    #sns_plot = sns.scatterplot(data=Value_Weight.iloc[:, 1:3]).set(title='Value-Weight')
-    plt.scatter(weight,value,  c="blue")
+    return (value,weight)
+
+
+def visual(save_dir,name=None,value=None,weight=None) :
+    # Visual after solve
+    if value==None and weight==None :
+        value,weight = process_visual(name)
+    plt.scatter(weight,value, c="blue")
     plt.title('Value-Weight')
     plt.xlabel("Weight")
     plt.ylabel("Values")
-    plt.savefig('visual/' + name + '.png')
+    plt.savefig(save_dir + name + '.png')
     plt.clf()
-
 
 if __name__ == '__main__':
 
     for i in range (0,13):
                 for j in [50,100,200,500,1000,2000,5000,10000] :
                     for k in [0,1] :
-                        for l in  random.sample(range(50, 100), 2):
+                        for l in  range(0,100):
                             name = str(i) + '-' + str(j) + '-' + str(k) + '-' + str(l)
-                            visual(name)
+                            save_dir = "visual/input/"
+                            visual(save_dir,name=name,value=None,weight=None)
