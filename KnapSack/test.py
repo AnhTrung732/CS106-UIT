@@ -6,10 +6,11 @@ class Test:
         self.values = []
         self.weights  = []
         self.file = ''
-        self.load(test_to_load)
+        self.test_to_load = test_to_load
+        self.load()
 
-    def load(self, test):
-        type_test, num_test, range_test, sample_test = test.split("-")
+    def load(self):
+        type_test, num_test, range_test, sample_test = self.test_to_load.split("-")
         #print(type_test, num_test, range_test, sample_test)
         type_test = str(0)*(2-len(type_test)) + type_test
         num_test = str(0)*(5-len(num_test)) + num_test
@@ -28,6 +29,7 @@ class Test:
         file =  'kplib' + '/' + type_name[0] +'/' + num_name[0] + '/' + range_name[0] + '/' + sample_name[0]
         #print(file)
         self.file = file
+        return self.file
 
     def process(self):
         file = self.file
